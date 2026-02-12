@@ -1,9 +1,14 @@
 import { test, expect } from '@playwright/test';
 
+// Ignore SSL errors due to fresh domain setup
+test.use({ ignoreHTTPSErrors: true });
+
 test('Gemini Man Roofing Full E2E Flow', async ({ page }) => {
+
     // 1. LOAD WEBSITE
     // Use the live Netlify URL as requested
-    await page.goto('https://splendid-mochi-6a1b08.netlify.app');
+    // Use the live production URL
+    await page.goto('https://geminimanroofing.com');
 
     // DEBUG: Listen for console logs and errors
     page.on('console', msg => console.log('BROWSER LOG:', msg.text()));
@@ -88,11 +93,8 @@ test('Gemini Man Roofing Full E2E Flow', async ({ page }) => {
     await page.locator('#storm-center').scrollIntoViewIfNeeded();
 
     // Mock Google Script Backend
-    await page.route('**/macros/s/*/exec', route => route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ result: 'success' })
-    }));
+    // REAL BACKEND TEST - No Mocking
+    // await page.route('**/macros/s/*/exec', ...); // Removed to test live Google Script
 
     await page.locator('input[name="name"]').fill('Playwright Test User');
     await page.locator('input[name="phone"]').fill('555-000-9999');

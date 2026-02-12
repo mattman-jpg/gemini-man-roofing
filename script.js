@@ -159,7 +159,7 @@ function checkZip() {
         msg.innerText = "⚠️ Please enter a valid 5-digit Zip Code.";
     } else {
         msg.style.color = "#ff9900"; // Yellow/Orange
-        msg.innerText = `📍 You are just outside our primary zone. Call (555) 123-4567 to verify coverage for ${input}.`;
+        msg.innerText = `📍 You are just outside our primary zone. Call (866) 518-2906 to verify coverage for ${input}.`;
     }
 }
 
@@ -408,7 +408,7 @@ if (form) {
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert("Something went wrong. Please call us directly at (555) 123-4567.");
+                alert("Something went wrong. Please call us directly at (866) 518-2906.");
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
             });

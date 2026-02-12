@@ -10,10 +10,10 @@
 
 // --- CONFIGURATION ---
 var TWILIO_CONFIG = {
-  ACCOUNT_SID: "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", // FORMAT: "AC..."
-  AUTH_TOKEN: "your_auth_token_here",
-  TWILIO_NUMBER: "+15550000000",
-  DESTINATION_NUMBER: "+15551234567" // Your personal phone number
+  ACCOUNT_SID: "ACa83bbeac76fbc101b0010cbc1cadc7d5", // Your Auth Token is still needed below
+  AUTH_TOKEN: "e4ff975ad2b76b8760a9a36193f3d2f5",
+  TWILIO_NUMBER: "+18665182906", // Your new Toll-Free Number
+  DESTINATION_NUMBER: "+19408674778" // Your Personal Cell (Owner)
 };
 
 var DISCORD_WEBHOOK_URL = ""; // Optional: Paste Webhook URL here
