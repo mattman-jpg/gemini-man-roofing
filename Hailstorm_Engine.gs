@@ -40,12 +40,14 @@ var CONFIG = {
   LOGO_URL: "https://via.placeholder.com/300x80?text=GEMINI+MAN+ROOFING", 
   LOGO_WIDTH: "300",
 
-  // TWILIO CONFIG
+  // TWILIO CONFIG (SECURE)
+  // These are now loaded from Project Settings > Script Properties
+  // Do NOT hardcode keys here!
   TWILIO: {
-    ACCOUNT_SID: "ACa83bbeac76fbc101b0010cbc1cadc7d5",
-    AUTH_TOKEN: "e4ff975ad2b76b8760a9a36193f3d2f5",
-    FROM_NUMBER: "+18665182906",
-    TO_NUMBER: "+19408674778"
+    ACCOUNT_SID: PropertiesService.getScriptProperties().getProperty('TWILIO_SID') || "MISSING_SID",
+    AUTH_TOKEN: PropertiesService.getScriptProperties().getProperty('TWILIO_TOKEN') || "MISSING_TOKEN",
+    FROM_NUMBER: PropertiesService.getScriptProperties().getProperty('TWILIO_FROM') || "+18665182906",
+    TO_NUMBER: PropertiesService.getScriptProperties().getProperty('TWILIO_TO') || "+19408674778"
   }
 };
 

@@ -420,7 +420,7 @@ function handleFormSubmit(formElement, typeOverride = null) {
                 submitBtn.disabled = false;
 
                 // Create and show the Booking Modal
-                const bookingUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/YOUR_SCHEDULE_ID"; // PLACEHOLDER
+                const bookingUrl = "https://calendly.com/YOUR_LINK"; // PLACEHOLDER: Paste your Calendly or Google Link here
 
                 const modalHtml = `
                     <div id="booking-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 3000;">
