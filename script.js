@@ -414,10 +414,30 @@ function handleFormSubmit(formElement, typeOverride = null) {
             body: JSON.stringify(data)
         })
             .then(() => {
-                alert("Thank you! Your request has been received. We will contact you shortly.");
+                // Success Handling with Appointment Booking
                 formElement.reset();
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
+
+                // Create and show the Booking Modal
+                const bookingUrl = "https://calendar.google.com/calendar/u/0/appointments/schedules/YOUR_SCHEDULE_ID"; // PLACEHOLDER
+
+                const modalHtml = `
+                    <div id="booking-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 3000;">
+                        <div style="background: var(--card-bg); padding: 40px; border-radius: 12px; border: 1px solid var(--accent-color); text-align: center; max-width: 500px; width: 90%;">
+                            <h2 style="color: #fff; margin-bottom: 20px;">✓ Request Received!</h2>
+                            <p style="color: #ddd; margin-bottom: 30px;">To fast-track your inspection, book a specific time on our calendar right now.</p>
+                            <a href="${bookingUrl}" target="_blank" class="btn btn-primary" style="display: block; width: 100%; margin-bottom: 15px; text-align: center; text-decoration: none;">📅 Book Inspection Now</a>
+                            <button id="close-booking" style="background: transparent; border: 1px solid var(--glass-border); color: #888; padding: 10px 20px; border-radius: 6px; cursor: pointer;">I'll wait for a call</button>
+                        </div>
+                    </div>
+                `;
+
+                document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+                document.getElementById('close-booking').addEventListener('click', () => {
+                    document.getElementById('booking-modal').remove();
+                });
             })
             .catch(error => {
                 console.error('Error:', error);
