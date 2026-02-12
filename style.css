@@ -1546,26 +1546,44 @@ a {
 
     /* Mobile 3D Anatomy Fixes */
     .roof-stack {
-        transform: rotateX(60deg) rotateZ(-30deg) scale(0.8);
-        /* Smaller on mobile */
+        transform: rotateX(60deg) rotateZ(-30deg) scale(0.65);
+        /* Even smaller on mobile */
+        margin-left: -20px;
     }
 
     .stack-layer {
-        width: 180px;
+        width: 160px;
         /* Smaller layers */
-        height: 180px;
+        height: 160px;
     }
 
     .stack-layer:hover,
     .stack-layer:active,
     .stack-layer.touched {
-        /* Add touched class support */
-        transform: translateZ(40px);
+        transform: translateZ(30px);
     }
 
     .info-card {
         padding: 15px;
-        /* Smaller padding */
+        font-size: 0.9rem;
+    }
+
+    /* General Mobile Cleanup */
+    .section-padding {
+        padding: 60px 0;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem; /* Prevent overflow */
+        line-height: 1.1;
+    }
+
+    .hero p {
+        font-size: 1rem;
     }
 }
 
