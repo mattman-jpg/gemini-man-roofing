@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storm Damage Restoration | Gemini Man Roofing</title>
+    <meta name="description"
+        content="Immediate storm response, insurance claim assistance, and forensic hail damage inspections. We help you get approved.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+    <style>
+        /* LANDING PAGE SPECIFIC STYLES */
+        .storm-hero {
+            background: linear-gradient(rgba(10, 14, 23, 0.8), rgba(10, 14, 23, 0.9)), url('https://images.unsplash.com/photo-1620646194451-f7a6a42792c3?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            min-height: 500px;
+        }
+
+        .damage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .damage-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .damage-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .damage-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .insurance-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            border-left: 2px solid var(--primary-color);
+            padding-left: 30px;
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 4px solid var(--dark-bg);
+        }
+
+        .timeline-item h3 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            color: var(--text-dim);
+        }
+
+        .highlight-box {
+            background: rgba(200, 125, 70, 0.1);
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="emergency-badge">
+                <span class="pulsing-dot"></span> 24/7 Storm Response
+            </div>
+            <a href="tel:+18665182906" class="top-phone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                </svg>
+                (866) 518-2906
+            </a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">
+                    GEMINI MAN <br>
+                    <span>ROOFING</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#about">About</a></li>
+            </ul>
+            <a href="#storm-form" class="btn btn-primary nav-cta">Free Warning Inspection</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero storm-hero">
+        <div class="container hero-content text-center">
+            <h1 class="fade-in-up">WAS YOUR HOME <br><span class="text-gradient"
+                    style="background: linear-gradient(90deg, #ff9a9e, #fecfef, #feada6); -webkit-background-clip: text;">HIT
+                    BY THE STORM?</span></h1>
+            <p class="fade-in-up delay-1">Hail damage isn't always visible from the ground. Hidden impacts can Void your
+                Manufacturer Warranty if left untreated.</p>
+            <div class="hero-buttons fade-in-up delay-2">
+                <a href="#storm-form" class="btn btn-primary" style="background-color: var(--accent-color);">Check My
+                    Address</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- DAMAGE SIGNS -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>SIGNS OF <span class="text-gradient">HIDDEN DAMAGE</span></h2>
+                <p>Do you see any of these indicators on your property?</p>
+            </div>
+            <div class="damage-grid">
+                <div class="damage-card">
+                    <div class="damage-icon">🌑</div>
+                    <h3>Bruised Shingles</h3>
+                    <p>Dark spots where granules have been knocked off. This exposes the asphalt to UV rays, leading to
+                        rapid failure.</p>
+                </div>
+                <div class="damage-card">
+                    <div class="damage-icon">🌧️</div>
+                    <h3>Dented Gutters</h3>
+                    <p>If your gutters or downspouts have dents, it's a 99% guarantee that your shingles took hits too.
+                    </p>
+                </div>
+                <div class="damage-card">
+                    <div class="damage-icon">🍃</div>
+                    <h3>Shredded Foliage</h3>
+                    <p>Check the trees and bushes around your house. Freshly stripped leaves are a sign of heavy impact.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSURANCE PROCESS -->
+    <section class="section-padding bg-dark-2">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>THE INSURANCE <span class="text-gradient">GAME PLAN</span></h2>
+                <p>We speak "Adjuster" so you don't have to.</p>
+            </div>
+
+            <div class="insurance-timeline">
+                <div class="timeline-item">
+                    <h3>Step 1: The Forensic Inspection (Free)</h3>
+                    <p>We fly a drone and walk the roof to document collateral damage (deck, fence, window screens). We
+                        create a "Pre-Loss Condition" report.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 2: Filing the Claim</h3>
+                    <p>We sit with you and help you call the claims center. We know exactly how to describe the "Date of
+                        Loss" and damage type to avoid automatic denials.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 3: The Adjuster Meeting (Crucial)</h3>
+                    <p>We meet your insurance adjuster ON THE ROOF. We use chalk to circle every hit they might miss. We
+                        fight for a Full Replacement, not a "patch job".</p>
+                    <div class="highlight-box">
+                        <strong>Fact:</strong> Claims are 300% more likely to be approved when a contractor is present
+                        during the adjuster meeting.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <h3>Step 4: Restoration to Code</h3>
+                    <p>We install your new roof using upgrades that Insurance pays for (Code items like Ice & Water
+                        Shield, Drip Edge, etc).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEAD FORM -->
+    <section id="storm-form" class="lead-capture section-padding">
+        <div class="container split-layout">
+            <div class="lead-text">
+                <h2>PRIORITY STORM LIST</h2>
+                <p>Our schedule fills up fast after a storm. Secure your spot in the queue for a free forensic
+                    inspection.</p>
+                <ul class="benefits-list">
+                    <li><span style="color: var(--accent-color);">✓</span> No-Obligation Digital Report</li>
+                    <li><span style="color: var(--accent-color);">✓</span> Full Photo Evidence</li>
+                    <li><span style="color: var(--accent-color);">✓</span> Insurance Pre-Approval Check</li>
+                </ul>
+            </div>
+            <div class="lead-form-container glass-panel">
+                <h3>Check Availability</h3>
+                <form id="hail-form" class="hail-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(866) 518-2906" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Property Address</label>
+                        <input type="text" id="address" name="address" placeholder="Address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hail-size">Did you see hail?</label>
+                        <select id="hail-size" name="hail-size">
+                            <option value="Unknown">Not sure</option>
+                            <option value="Yes">Yes, heard it hitting</option>
+                            <option value="Neighbors">Neighbors are getting roofs</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="background: var(--accent-color);">Get
+                        Priority Access</button>
+                    <p class="form-disclaimer">Your data is safe. We hate spam too.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer section-padding">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>GEMINI MAN <span class="text-gradient">ROOFING</span></h3>
+                <p>Storm Restoration Specialists.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><strong>Phone:</strong> (866) 518-2906</p>
+                <p><strong>Hours:</strong> 24/7 Emergency Service</p>
+                <p><a href="index.html" style="color: var(--primary-color);">Back to Main Site</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHARED SCRIPT -->
+    <script src="script.js?v=5"></script>
+
+</body>
+
+</html>

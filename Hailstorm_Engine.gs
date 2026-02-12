@@ -149,7 +149,6 @@ function runHailstormEngine() {
       }
     }
   }
-  }
 }
 
 function sendTwilioSMS(body) {
