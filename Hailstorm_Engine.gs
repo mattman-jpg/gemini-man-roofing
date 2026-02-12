@@ -38,7 +38,15 @@ var CONFIG = {
   
   // LOGO SETTINGS
   LOGO_URL: "https://via.placeholder.com/300x80?text=GEMINI+MAN+ROOFING", 
-  LOGO_WIDTH: "300"
+  LOGO_WIDTH: "300",
+
+  // TWILIO CONFIG
+  TWILIO: {
+    ACCOUNT_SID: "ACa83bbeac76fbc101b0010cbc1cadc7d5",
+    AUTH_TOKEN: "e4ff975ad2b76b8760a9a36193f3d2f5",
+    FROM_NUMBER: "+18665182906",
+    TO_NUMBER: "+19408674778"
+  }
 };
 
 // --- SPINTAX ENGINE ---
@@ -140,6 +148,32 @@ function runHailstormEngine() {
         sheet.getRange(rowIndex, CONFIG.COLUMN_MAP.ERRORS + 1).setValue("Error: " + e.stack);
       }
     }
+  }
+  }
+}
+
+function sendTwilioSMS(body) {
+  var url = "https://api.twilio.com/2010-04-01/Accounts/" + CONFIG.TWILIO.ACCOUNT_SID + "/Messages.json";
+  
+  var payload = {
+    "To": CONFIG.TWILIO.TO_NUMBER,
+    "From": CONFIG.TWILIO.FROM_NUMBER,
+    "Body": body
+  };
+
+  var options = {
+    "method": "post",
+    "payload": payload,
+    "headers": {
+      "Authorization": "Basic " + Utilities.base64Encode(CONFIG.TWILIO.ACCOUNT_SID + ":" + CONFIG.TWILIO.AUTH_TOKEN)
+    }
+  };
+
+  try {
+    UrlFetchApp.fetch(url, options);
+    console.log("SMS Sent via Twilio");
+  } catch (e) {
+    console.error("Twilio Error: " + e.toString());
   }
 }
 
@@ -264,6 +298,10 @@ function doPost(e) {
          "New Roofing Lead: " + params.name, 
          "New Lead Received!\n\nName: " + params.name + "\nPhone: " + params.phone + "\nZip: " + params.zip + "\nType: " + params.damageType + "\n\nCheck 'Leads' tab in sheet."
        );
+
+       // Send SMS Alert (Twilio)
+       sendTwilioSMS("🚨 NEW LEAD: " + params.name + " (" + params.damageType + ") in " + params.zip + ". Phone: " + params.phone);
+
     }
 
     return ContentService.createTextOutput(JSON.stringify({ "result": "success" }))

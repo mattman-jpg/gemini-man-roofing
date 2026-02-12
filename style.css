@@ -1186,6 +1186,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2101;
 }
 
 #chat-trigger:hover {
@@ -1206,6 +1207,7 @@ a {
     flex-direction: column;
     overflow: hidden;
     transition: all 0.3s;
+    z-index: 2100;
 }
 
 #chat-window.hidden {
@@ -1578,7 +1580,8 @@ a {
     }
 
     .hero h1 {
-        font-size: 2.5rem; /* Prevent overflow */
+        font-size: 2.5rem;
+        /* Prevent overflow */
         line-height: 1.1;
     }
 
