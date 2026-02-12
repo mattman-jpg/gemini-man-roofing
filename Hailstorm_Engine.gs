@@ -279,6 +279,28 @@ function doPost(e) {
 
        // Optional: Send copy to user (requires more complex setup, skipping for now to keep simple)
     
+    } else if (params.type === 'commercial_lead') {
+       // HANDLE COMMERCIAL LEAD
+       // Save to Sheet (Leads Tab)
+       sheet.appendRow([
+         timestamp,
+         params.name,
+         params.phone,
+         params.company || "N/A", // Use Company as Address/Zip placeholder if missing
+         params.damageType, // e.g., "Commercial: Warehouse"
+         "Commercial Landing Page"
+       ]);
+
+       // Send Notification to Owner
+       GmailApp.sendEmail(
+         CONFIG.OWNER_EMAIL, 
+         "🏢 COMMERCIAL LEAD: " + params.company, 
+         "High Value Lead!\n\nName: " + params.name + "\nCompany: " + params.company + "\nPhone: " + params.phone + "\nType: " + params.damageType + "\nSqft: " + (params.sqft || "N/A")
+       );
+       
+       // Send SMS Alert (Twilio)
+       sendTwilioSMS("🏢 COMMERCIAL LEAD: " + params.company + " (" + params.damageType + "). Phone: " + params.phone);
+    
     } else {
        // HANDLE STANDARD LEAD
        // Save to Sheet

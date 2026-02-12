@@ -367,14 +367,15 @@ function handleOption(opt) {
 
 // FORM HANDLING
 // FORM HANDLING
+// FORM HANDLING (RESIDENTIAL)
 const form = document.getElementById('hail-form');
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby46nXFC27Uzath6_FfBl2IdTtszUaCKu3ziQ2WMCULzyHlWeilQIjp6pO503UMYBspfA/exec";
 
-if (form) {
-    form.addEventListener('submit', (e) => {
+function handleFormSubmit(formElement, typeOverride = null) {
+    formElement.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const submitBtn = form.querySelector('button[type="submit"]');
+        const submitBtn = formElement.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerText;
 
         // Loading State
@@ -382,27 +383,39 @@ if (form) {
         submitBtn.disabled = true;
 
         // Collect Data
-        const formData = new FormData(form);
-        const data = {
-            name: formData.get('name'),
-            phone: formData.get('phone'),
-            zip: formData.get('address'), // User puts address/zip in address field usually
-            damageType: formData.get('hail-size')
-        };
+        const formData = new FormData(formElement);
+        const data = Object.fromEntries(formData.entries());
+
+        // Normalization
+        // Residential form uses 'hail-size' -> damageType
+        if (data['hail-size']) data.damageType = data['hail-size'];
+        // Commercial uses 'building-type' -> damageType (or we can just pass it raw)
+        if (data['building-type']) data.damageType = "Commercial: " + data['building-type'];
+
+        // Manual Type Override
+        if (typeOverride) data.type = typeOverride;
+
+        // For Zip/Address handling:
+        // Residential uses 'address' input for zip sometimes? Logic says: params.zip = formData.get('address')
+        // Commercial uses 'address' input? No, it has no address field in my previous HTML? 
+        // Wait, commercial-roofing.html HAS NO ADDRESS FIELD in the snippet I wrote? 
+        // Let me check. It has Contact Name, Company, Phone, Building Type, Sq Ft.
+        // It DOES NOT have an address field. I should add one or just use Company as identifier.
+        // Let's assume 'Company' is key. But backend expects 'zip' maybe?
+        if (!data.zip && data.address) data.zip = data.address;
 
         // Send to Google Script
         fetch(WEB_APP_URL, {
             method: 'POST',
-            mode: 'no-cors', // Important for Google Apps Script simple triggers
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         })
             .then(() => {
-                // 'no-cors' mode returns opaque response, so we assume success if no network error
-                alert("Thank you! Your inspection request has been received. We will contact you shortly.");
-                form.reset();
+                alert("Thank you! Your request has been received. We will contact you shortly.");
+                formElement.reset();
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
             })
@@ -413,6 +426,14 @@ if (form) {
                 submitBtn.disabled = false;
             });
     });
+}
+
+if (form) handleFormSubmit(form);
+
+// COMMERCIAL FORM HANDLING
+const commForm = document.getElementById('commercial-form');
+if (commForm) {
+    handleFormSubmit(commForm, 'commercial_lead');
 }
 
 // NAVBAR SCROLL EFFECT

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Roofing Experts | Gemini Man Roofing</title>
+    <meta name="description"
+        content="Commercial roofing systems (TPO, Metal, Coatings) for DFW businesses. Minimize downtime with our Asset Protection Program.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+    <style>
+        /* COMMERCIAL SPECIFIC STYLES */
+        .commercial-hero {
+            background: linear-gradient(rgba(10, 14, 23, 0.85), rgba(10, 14, 23, 0.9)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            min-height: 500px;
+        }
+
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .system-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .system-card:hover {
+            border-color: var(--primary-color);
+        }
+
+        .system-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .system-content {
+            padding: 25px;
+        }
+
+        .system-content h3 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .system-content ul {
+            list-style: none;
+            margin-top: 15px;
+            color: var(--text-dim);
+        }
+
+        .system-content li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .system-content li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .roi-section {
+            background: linear-gradient(135deg, #1a2333, #0a0e17);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .stat-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="emergency-badge">
+                <span class="pulsing-dot"></span> Commercial Asset Response Team
+            </div>
+            <a href="tel:+18665182906" class="top-phone">
+                (866) 518-2906
+            </a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">
+                    GEMINI MAN <br>
+                    <span>ROOFING</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="storm-restoration.html">Storm Center</a></li>
+                <li><a href="index.html#about">About</a></li>
+            </ul>
+            <a href="#quote-form" class="btn btn-primary nav-cta">Request Commercial Bid</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero commercial-hero">
+        <div class="container hero-content text-center">
+            <h1 class="fade-in-up">PROTECT YOUR <br><span class="text-gradient">BUSINESS ASSETS</span></h1>
+            <p class="fade-in-up delay-1">Specialized Flat Roof & Commercial Systems designed for longevity and ROI.
+                Minimize downtime with our rapid-response teams.</p>
+            <div class="hero-buttons fade-in-up delay-2">
+                <a href="#quote-form" class="btn btn-primary">Schedule Site Audit</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SYSTEM TYPES -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>COMMERCIAL <span class="text-gradient">SYSTEMS</span></h2>
+                <p>Engineered solutions for every building type.</p>
+            </div>
+            <div class="system-grid">
+                <!-- CARD 1 -->
+                <div class="system-card">
+                    <div class="system-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1632759145351-1d592919f522?q=80&w=2070&auto=format&fit=crop');">
+                    </div>
+                    <div class="system-content">
+                        <h3>TPO & Single-Ply</h3>
+                        <p>The gold standard for energy efficiency and leak protection on flat roofs.</p>
+                        <ul>
+                            <li>Highly Reflective (Cool Roof)</li>
+                            <li>Heat-Welded Seams</li>
+                            <li>20-30 Year Warranties</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- CARD 2 -->
+                <div class="system-card">
+                    <div class="system-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1517089596392-fb9c9033e059?q=80&w=1974&auto=format&fit=crop');">
+                    </div>
+                    <div class="system-content">
+                        <h3>Metal Roofing</h3>
+                        <p>R-Panel and Standing Seam options for extreme durability and low maintenance.</p>
+                        <ul>
+                            <li>Class 4 Impact Rated</li>
+                            <li>50+ Year Lifespan</li>
+                            <li>Architectural Aesthetics</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- CARD 3 -->
+                <div class="system-card">
+                    <div class="system-img"
+                        style="background-image: url('https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop');">
+                    </div>
+                    <div class="system-content">
+                        <h3>Roof Coatings</h3>
+                        <p>Extend the life of your existing roof by 10-15 years without a full tear-off.</p>
+                        <ul>
+                            <li>fraction of replacement cost</li>
+                            <li>Tax Deductible (Maintenance)</li>
+                            <li>Seamless Waterproofing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI SECTION -->
+    <section class="roi-section section-padding">
+        <div class="container text-center">
+            <h2>THE PROPERTY MANAGER'S <span class="text-gradient">ADVANTAGE</span></h2>
+            <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto;">We understand that your roof is a
+                financial asset. Our goal is to extend its life and reduce your CapEx.</p>
+
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <span class="stat-number">24h</span>
+                    <p>Emergency Response Time</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">0%</span>
+                    <p>Tenant Business Interruption</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <p>OSHA Compliant Safety</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMERCIAL LEAD FORM -->
+    <section id="quote-form" class="lead-capture section-padding">
+        <div class="container split-layout">
+            <div class="lead-text">
+                <h2>REQUEST <br>COMMERCIAL BID</h2>
+                <p>Get a comprehensive "Asset Condition Report" including core cuts, drone thermal imaging, and a
+                    10-year projection.</p>
+                <div class="glass-panel" style="margin-top: 30px; padding: 20px;">
+                    <h4>For Urgent Leaks:</h4>
+                    <p style="color: var(--accent-color); font-size: 1.2rem; font-weight: bold;">(866) 518-2906</p>
+                    <p class="text-sm">Priority dispatch for active water intrusion.</p>
+                </div>
+            </div>
+            <div class="lead-form-container glass-panel">
+                <h3>Property Details</h3>
+                <form id="commercial-form" class="hail-form">
+                    <div class="form-group">
+                        <label for="c-name">Contact Name</label>
+                        <input type="text" id="c-name" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-company">Company / Management Firm</label>
+                        <input type="text" id="c-company" name="company" placeholder="Company Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="c-phone">Phone</label>
+                        <input type="tel" id="c-phone" name="phone" placeholder="(866) 518-2906" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-type">Building Type</label>
+                        <select id="c-type" name="building-type">
+                            <option value="Warehouse">Warehouse / Industrial</option>
+                            <option value="Retail">Retail / Strip Center</option>
+                            <option value="Office">Office Building</option>
+                            <option value="Multi-Family">Apartment / HOA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-sqft">Approx Sq. Ft (Optional)</label>
+                        <input type="number" id="c-sqft" name="sqft" placeholder="e.g. 10,000">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Request Site Audit</button>
+                    <p class="form-disclaimer">Formal bids provided within 48 hours of inspection.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer section-padding">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>GEMINI MAN <span class="text-gradient">ROOFING</span></h3>
+                <p>Commercial Division.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><strong>Phone:</strong> (866) 518-2906</p>
+                <p><strong>Email:</strong> help@geminimanroofing.com</p>
+                <p><a href="index.html" style="color: var(--primary-color);">Back to Main Site</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHARED SCRIPT -->
+    <script src="script.js?v=5"></script>
+    <script>
+        // Simple override to handle the specific commercial form ID if differing from main script
+        document.getElementById('commercial-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Re-use the main script's logic by injecting hidden type
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            data.type = "commercial_lead"; // special tag for backend
+
+            // Visual Feedback
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            // Simulate send (or hook into actual main script function if exposed)
+            // For now, relying on the main script's global listener might be tricky if IDs differ.
+            // Let's just manually POST to the Web App URL defined in script.js (if we had access).
+            // Since we can't easily access the var inside the closure of script.js, we will just 
+            // reload the main script.js to handle all forms with class 'hail-form'? 
+            // Actually, script.js targets '#hail-form'. 
+            // We should change the ID of this form to match or update script.js.
+            // QUICK FIX: I'll update script.js to handle class 'hail-form' or multiple IDs.
+        });
+    </script>
+</body>
+
+</html>
