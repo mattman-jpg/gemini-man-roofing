@@ -368,7 +368,7 @@ function handleOption(opt) {
 // FORM HANDLING
 // FORM HANDLING
 const form = document.getElementById('hail-form');
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby46nXFC27Uzath6_FfBl2IdTtszUaCKu3ziQ2WMCULzyHlWeilQIjp6pO503UMYBspfA/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwa888cJ1s0xFMaxpNuSMyQCJpwRVin38-QGZwLbuIm_Bn_ENZmOJB2FGyIOAx0r29pYA/exec";
 
 if (form) {
     form.addEventListener('submit', (e) => {
