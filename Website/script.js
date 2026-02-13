@@ -368,7 +368,7 @@ function handleOption(opt) {
 // FORM HANDLING
 // FORM HANDLING
 const form = document.getElementById('hail-form');
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwa888cJ1s0xFMaxpNuSMyQCJpwRVin38-QGZwLbuIm_Bn_ENZmOJB2FGyIOAx0r29pYA/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw2tm75WavNHPc0ymc2J9jMW9Aux89zxVo4sVcIdNYg-qhKwzHFApt85W5Kysm8dHWm2w/exec";
 
 if (form) {
     form.addEventListener('submit', (e) => {
@@ -387,7 +387,8 @@ if (form) {
             name: formData.get('name'),
             phone: formData.get('phone'),
             zip: formData.get('address'), // User puts address/zip in address field usually
-            damageType: formData.get('hail-size')
+            damageType: formData.get('hail-size'),
+            key: "gemini-enterprise-key-v2"
         };
 
         // Send to Google Script
