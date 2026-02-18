@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+google-cloud-firestore
+sendgrid
+pydantic
+python-multipart
+python-dotenv
