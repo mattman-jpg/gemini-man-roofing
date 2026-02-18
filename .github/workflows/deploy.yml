@@ -30,7 +30,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './Website'  # Pointing to the Website folder where index.html lives
+          path: '.'  # Deploy the root directory (Project_Hailstorm) where the latest files are
 
       - name: Deploy to GitHub Pages
         id: deployment
