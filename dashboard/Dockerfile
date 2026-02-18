@@ -20,4 +20,4 @@ EXPOSE 8080
 ENV PYTHONUNBUFFERED=1
 
 # Run Command
-CMD ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
