@@ -1,6 +1,19 @@
 // DOMContentLoaded wrapper removed for immediate execution
-console.log('Gemini Manager Script v3 Loaded - Immediate Execution');
+console.log('Gemini Manager Script v4 (Serverless) Loaded');
 
+// --- FIREBASE INITIALIZATION ---
+const firebaseConfig = {
+    apiKey: "AIzaSyCwXLl7jo_oMWq_I0rkG_1GlI51ATSFb0o",
+    authDomain: "solid-binder-487301-q0.firebaseapp.com",
+    projectId: "solid-binder-487301-q0",
+    storageBucket: "solid-binder-487301-q0.firebasestorage.app",
+    messagingSenderId: "103616089821",
+    appId: "1:103616089821:web:de204022bd01b7b5c31534"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// --- EMAILJS INITIALIZATION ---
 // SMOOTH SCROLLING FOR ANCHOR LINKS
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -163,13 +176,14 @@ function checkZip() {
     }
 }
 
-// BEFORE & AFTER SLIDER LOGIC (Previously missing)
+// BEFORE & AFTER SLIDER LOGIC
 const sliderContainer = document.querySelector('.ba-slider');
 if (sliderContainer) {
-    const afterImage = document.querySelector('.ba-image-before'); // Usually the top overlay
+    // The 'Before' image is the top layer (Storm Damage) that gets clipped
+    // The 'After' image is the background layer (Restored)
+    const topLayer = document.querySelector('.ba-image-before');
     const handle = document.querySelector('.ba-handle');
 
-    // This function updates the visual state based on X position
     function updateSlider(clientX) {
         const rect = sliderContainer.getBoundingClientRect();
         let x = clientX - rect.left;
@@ -181,16 +195,17 @@ if (sliderContainer) {
         // Percentage
         const percentage = (x / rect.width) * 100;
 
-        // Update Clip Path (Reveal Effect)
-        // inset(top right bottom left) -> we change 'right' to hide the overlay
-        // If percentage is 50%, we want to show 50% from left. So inset right should be 50%.
-        afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+        // Clip the Top Layer (Before Image)
+        // inset(top right bottom left)
+        // We want to clip the right side based on percentage
+        // Example: 50% slider -> Clip right side by 50% -> Shows 50% of image
+        topLayer.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
         handle.style.left = `${percentage}%`;
     }
 
     // Mouse Events
     sliderContainer.addEventListener('mousedown', (e) => {
-        e.preventDefault(); // Prevent image dragging
+        e.preventDefault();
         sliderContainer.addEventListener('mousemove', onMouseMove);
         updateSlider(e.clientX);
     });
@@ -205,6 +220,7 @@ if (sliderContainer) {
 
     // Touch Events
     sliderContainer.addEventListener('touchstart', (e) => {
+        // e.preventDefault(); // Don't block scroll completely unless horizontal
         sliderContainer.addEventListener('touchmove', onTouchMove);
         updateSlider(e.touches[0].clientX);
     });
@@ -366,10 +382,9 @@ function handleOption(opt) {
 }
 
 // FORM HANDLING
-// FORM HANDLING
-// FORM HANDLING (RESIDENTIAL)
 const form = document.getElementById('hail-form');
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby46nXFC27Uzath6_FfBl2IdTtszUaCKu3ziQ2WMCULzyHlWeilQIjp6pO503UMYBspfA/exec";
+// GOOGLE APPS SCRIPT PROXY (SendGrid Bridge)
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby5MIR2sfRxHOiYZW8ObXL9PNoBXwDnubqS39EIBy05oJnKF2zABBDw64XhTTn-7q9vLA/exec";
 
 function handleFormSubmit(formElement, typeOverride = null) {
     formElement.addEventListener('submit', (e) => {
@@ -387,48 +402,47 @@ function handleFormSubmit(formElement, typeOverride = null) {
         const data = Object.fromEntries(formData.entries());
 
         // Normalization
-        // Residential form uses 'hail-size' -> damageType
         if (data['hail-size']) data.damageType = data['hail-size'];
-        // Commercial uses 'building-type' -> damageType (or we can just pass it raw)
         if (data['building-type']) data.damageType = "Commercial: " + data['building-type'];
-
-        // Manual Type Override
         if (typeOverride) data.type = typeOverride;
-
-        // For Zip/Address handling:
-        // Residential uses 'address' input for zip sometimes? Logic says: params.zip = formData.get('address')
-        // Commercial uses 'address' input? No, it has no address field in my previous HTML? 
-        // Wait, commercial-roofing.html HAS NO ADDRESS FIELD in the snippet I wrote? 
-        // Let me check. It has Contact Name, Company, Phone, Building Type, Sq Ft.
-        // It DOES NOT have an address field. I should add one or just use Company as identifier.
-        // Let's assume 'Company' is key. But backend expects 'zip' maybe?
         if (!data.zip && data.address) data.zip = data.address;
 
-        // Send to Google Script
+        // Add Timestamp
+        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        data.status = 'PENDING';
+
+        // 1. Save to Firestore (Directly) -- Optional Backup
+        db.collection('leads').add(data).then(() => console.log("Saved to Firestore Backup"));
+
+        // 2. Send to Google Apps Script (SendGrid Proxy)
         fetch(WEB_APP_URL, {
             method: 'POST',
-            mode: 'no-cors',
+            mode: 'no-cors', // IMPORTANT for Google Apps Script
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain;charset=utf-8',
             },
             body: JSON.stringify(data)
         })
-            .then(() => {
+            .then(response => {
                 // Success Handling with Appointment Booking
                 formElement.reset();
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
 
                 // Create and show the Booking Modal
-                const bookingUrl = "https://calendly.com/YOUR_LINK"; // PLACEHOLDER: Paste your Calendly or Google Link here
+                const preferredDate = data.preferred_date || "today";
+                const preferredTime = data.preferred_time || "asap";
 
                 const modalHtml = `
                     <div id="booking-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 3000;">
                         <div style="background: var(--card-bg); padding: 40px; border-radius: 12px; border: 1px solid var(--accent-color); text-align: center; max-width: 500px; width: 90%;">
                             <h2 style="color: #fff; margin-bottom: 20px;">✓ Request Received!</h2>
-                            <p style="color: #ddd; margin-bottom: 30px;">To fast-track your inspection, book a specific time on our calendar right now.</p>
-                            <a href="${bookingUrl}" target="_blank" class="btn btn-primary" style="display: block; width: 100%; margin-bottom: 15px; text-align: center; text-decoration: none;">📅 Book Inspection Now</a>
-                            <button id="close-booking" style="background: transparent; border: 1px solid var(--glass-border); color: #888; padding: 10px 20px; border-radius: 6px; cursor: pointer;">I'll wait for a call</button>
+                            <p style="color: #ddd; margin-bottom: 20px;">We have received your request for an inspection.</p>
+                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 25px;">
+                                <p style="color: #00d2ff; font-weight: bold; margin: 0;">Requested: ${preferredDate} @ ${preferredTime}</p>
+                            </div>
+                            <p style="color: #aaa; font-size: 0.9em; margin-bottom: 30px;">Our dispatch team will call you shortly to confirm availability.</p>
+                            <button id="close-booking" class="btn btn-primary" style="width: 100%;">Close</button>
                         </div>
                     </div>
                 `;
@@ -441,7 +455,7 @@ function handleFormSubmit(formElement, typeOverride = null) {
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert("Something went wrong. Please call us directly at (866) 518-2906.");
+                alert("Submission failed. Error: " + error.message + "\n\nPlease call us directly at (866) 518-2906.");
                 submitBtn.innerText = originalText;
                 submitBtn.disabled = false;
             });
@@ -554,12 +568,17 @@ if (referralModal) {
 
         const formData = new FormData(referralForm);
         const data = Object.fromEntries(formData.entries());
-        data.type = 'referral'; // Explicitly set type
+        data.type = 'referral';
+        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
 
+        // Save to Firestore Backup
+        db.collection('referrals').add(data);
+
+        // Send via GAS Proxy
         fetch(WEB_APP_URL, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(data)
         })
             .then(() => {
@@ -598,10 +617,15 @@ if (emailQuoteBtn) {
 
             emailQuoteBtn.innerText = 'Sending...';
 
+            // Save to Firestore Backup
+            const quoteData = { ...data, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+            db.collection('quotes').add(quoteData);
+
+            // Send via GAS Proxy
             fetch(WEB_APP_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify(data)
             })
                 .then(() => {
@@ -611,4 +635,3 @@ if (emailQuoteBtn) {
         }
     });
 }
-

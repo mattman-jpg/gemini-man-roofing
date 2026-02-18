@@ -68,4 +68,24 @@ function initMap() {
             },
         });
     });
+    // 3. ADDRESS AUTOCOMPLETE (Lead Form)
+    const addressInput = document.getElementById("address");
+    if (addressInput) {
+        const autocomplete = new google.maps.places.Autocomplete(addressInput, {
+            componentRestrictions: { country: "us" },
+            fields: ["address_components", "geometry", "icon", "name"],
+            types: ["address"],
+        });
+
+        autocomplete.addListener("place_changed", () => {
+            const place = autocomplete.getPlace();
+            if (!place.geometry) {
+                // User entered name of Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+            // Optional: Auto-fill zip/city if needed in future
+        });
+    }
 }

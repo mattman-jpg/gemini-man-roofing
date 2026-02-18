@@ -171,7 +171,7 @@
                 <!-- CARD 2 -->
                 <div class="system-card">
                     <div class="system-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1517089596392-fb9c9033e059?q=80&w=1974&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1662584556461-8b30d367c3b9?q=80&w=2070&auto=format&fit=crop');">
                     </div>
                     <div class="system-content">
                         <h3>Metal Roofing</h3>
@@ -186,7 +186,7 @@
                 <!-- CARD 3 -->
                 <div class="system-card">
                     <div class="system-img"
-                        style="background-image: url('https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop');">
+                        style="background-image: url('https://images.unsplash.com/photo-1596265324520-227a92284716?q=80&w=2070&auto=format&fit=crop');">
                     </div>
                     <div class="system-content">
                         <h3>Roof Coatings</h3>
@@ -293,29 +293,8 @@
     <!-- SHARED SCRIPT -->
     <script src="script.js?v=5"></script>
     <script>
-        // Simple override to handle the specific commercial form ID if differing from main script
-        document.getElementById('commercial-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Re-use the main script's logic by injecting hidden type
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            data.type = "commercial_lead"; // special tag for backend
-
-            // Visual Feedback
-            const btn = this.querySelector('button[type="submit"]');
-            const originalText = btn.innerText;
-            btn.innerText = "Sending...";
-            btn.disabled = true;
-
-            // Simulate send (or hook into actual main script function if exposed)
-            // For now, relying on the main script's global listener might be tricky if IDs differ.
-            // Let's just manually POST to the Web App URL defined in script.js (if we had access).
-            // Since we can't easily access the var inside the closure of script.js, we will just 
-            // reload the main script.js to handle all forms with class 'hail-form'? 
-            // Actually, script.js targets '#hail-form'. 
-            // We should change the ID of this form to match or update script.js.
-            // QUICK FIX: I'll update script.js to handle class 'hail-form' or multiple IDs.
-        });
+        // Form handling is managed globally by script.js
+        console.log("Commercial Page Loaded");
     </script>
 </body>
 

@@ -296,7 +296,7 @@ a {
     display: flex;
     align-items: center;
     /* Use Logo as Background */
-    background: url('Gemini_Generated_Image_7ncu6y7ncu6y7ncu.jpeg') no-repeat center center/cover;
+    background: url('assets/hero-bg.jpeg') no-repeat center center/cover;
 }
 
 .hero-overlay {
