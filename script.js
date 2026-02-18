@@ -384,7 +384,8 @@ function handleOption(opt) {
 // FORM HANDLING
 const form = document.getElementById('hail-form');
 // GOOGLE APPS SCRIPT PROXY (SendGrid Bridge)
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby5MIR2sfRxHOiYZW8ObXL9PNoBXwDnubqS39EIBy05oJnKF2zABBDw64XhTTn-7q9vLA/exec";
+// GOOGLE CLOUD RUN BACKEND
+const WEB_APP_URL = "https://hailstorm-backend-103616089821.us-central1.run.app/submit-lead";
 
 function handleFormSubmit(formElement, typeOverride = null) {
     formElement.addEventListener('submit', (e) => {
@@ -405,21 +406,25 @@ function handleFormSubmit(formElement, typeOverride = null) {
         if (data['hail-size']) data.damageType = data['hail-size'];
         if (data['building-type']) data.damageType = "Commercial: " + data['building-type'];
         if (typeOverride) data.type = typeOverride;
+        // Phone is already in 'data.phone' from input name="phone"
         if (!data.zip && data.address) data.zip = data.address;
 
         // Add Timestamp
-        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        if (firebase.firestore) {
+            data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        }
         data.status = 'PENDING';
 
         // 1. Save to Firestore (Directly) -- Optional Backup
-        db.collection('leads').add(data).then(() => console.log("Saved to Firestore Backup"));
+        if (db) {
+            db.collection('leads').add(data).then(() => console.log("Saved to Firestore Backup"));
+        }
 
-        // 2. Send to Google Apps Script (SendGrid Proxy)
+        // 2. Send to Cloud Run Backend
         fetch(WEB_APP_URL, {
             method: 'POST',
-            mode: 'no-cors', // IMPORTANT for Google Apps Script
             headers: {
-                'Content-Type': 'text/plain;charset=utf-8',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         })
