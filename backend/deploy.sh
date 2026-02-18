@@ -10,27 +10,30 @@ echo "🚀 Starting Cloud Shell Deployment for $PROJECT_ID..."
 # 1. Set Project
 gcloud config set project $PROJECT_ID
 
-# 2. Enable APIs & Configure Registry
+# 2. Enable APIs & Configure Artifact Registry
 echo "Enabling APIs..."
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com firestore.googleapis.com artifactregistry.googleapis.com
 
-# Create Artifact Registry if it doesn't exist (Fixes GCR permission error)
-echo "📦 Configuring Artifact Registry..."
-gcloud artifacts repositories create gcr.io \
-    --repository-format=docker \
-    --location=us \
-    --description="Docker repository" \
-    || echo "Registry might already exist, continuing..."
+# Define Artifact Registry URL
+REPO_NAME="containers"
+IMAGE_URL="us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$SERVICE_NAME"
 
-# 3. Build Container
+# Create Artifact Registry (Idempotent)
+echo "📦 Configuring Artifact Registry..."
+gcloud artifacts repositories create $REPO_NAME \
+    --repository-format=docker \
+    --location=$REGION \
+    --description="Docker repository for Hailstorm" \
+    || echo "Registry likely exists, continuing..."
+
+# 3. Build Container (using Artifact Registry)
 echo "🏗️ Building Container..."
-# Use gcloud builds submit
-gcloud builds submit --tag gcr.io/$PROJECT_ID/$SERVICE_NAME
+gcloud builds submit --tag $IMAGE_URL
 
 # 4. Deploy to Cloud Run
 echo "☁️ Deploying to Cloud Run..."
 gcloud run deploy $SERVICE_NAME \
-  --image gcr.io/$PROJECT_ID/$SERVICE_NAME \
+  --image $IMAGE_URL \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
