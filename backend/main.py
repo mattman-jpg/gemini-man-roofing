@@ -40,8 +40,9 @@ except Exception as e:
 # Data Models
 class Lead(BaseModel):
     name: str
-    email: str
+    phone: str
     address: str
+    email: Optional[str] = None
     hail_size: float = 0.0
     campaign_id: str = "DEFAULT"
     preferred_date: Optional[str] = None
@@ -69,6 +70,7 @@ async def submit_lead(lead: Lead, background_tasks: BackgroundTasks):
             doc_ref = db.collection('leads').document()
             doc_ref.set({
                 'name': lead.name,
+                'phone': lead.phone,
                 'email': lead.email,
                 'address': lead.address,
                 'hail_size': lead.hail_size,
@@ -101,8 +103,10 @@ def process_email(lead: Lead):
     try:
         # Construct Email Content
         content = f"<strong>New Lead: {lead.name}</strong><br>"
+        content += f"Phone: {lead.phone}<br>"
         content += f"Address: {lead.address}<br>"
-        content += f"Email: {lead.email}<br>"
+        if lead.email:
+            content += f"Email: {lead.email}<br>"
         if lead.preferred_date:
             content += f"<br><strong>Requested Appointment:</strong><br>"
             content += f"Date: {lead.preferred_date}<br>"
