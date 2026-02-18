@@ -14,14 +14,10 @@ gcloud config set project $PROJECT_ID
 echo "Enabling APIs..."
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com firestore.googleapis.com
 
-# 3. Build Container
-echo "🏗️ Building Container..."
-gcloud builds submit --tag gcr.io/$PROJECT_ID/$SERVICE_NAME
-
-# 4. Deploy to Cloud Run
+# 3. Deploy to Cloud Run (Handles Build & Push automatically)
 echo "☁️ Deploying to Cloud Run..."
 gcloud run deploy $SERVICE_NAME \
-  --image gcr.io/$PROJECT_ID/$SERVICE_NAME \
+  --source . \
   --platform managed \
   --region $REGION \
   --allow-unauthenticated \
