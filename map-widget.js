@@ -8,6 +8,7 @@ function initMap() {
     const map = new google.maps.Map(document.getElementById("service-map"), {
         zoom: 8,
         center: northTexas,
+        mapId: "DEMO_MAP_ID", // Required for AdvancedMarkerElement
         styles: [
             // Dark Mode / "Storm" Style
             { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -53,19 +54,19 @@ function initMap() {
     ];
 
     storms.forEach((storm) => {
-        new google.maps.Marker({
+        // AdvancedMarkerElement migration
+        const pinElement = new google.maps.marker.PinElement({
+             background: "#ff3d00",
+             borderColor: "white",
+             glyphColor: "white",
+             scale: 1.2,
+        });
+
+        new google.maps.marker.AdvancedMarkerElement({
             position: storm.pos,
             map,
             title: storm.title,
-            animation: google.maps.Animation.DROP,
-            icon: {
-                path: google.maps.SymbolPath.CIRCLE,
-                scale: 8,
-                fillColor: "#ff3d00", // Alert Orange
-                fillOpacity: 1,
-                strokeColor: "white",
-                strokeWeight: 2,
-            },
+            content: pinElement.element,
         });
     });
     // 3. ADDRESS AUTOCOMPLETE (Lead Form)
