@@ -73,19 +73,18 @@ def init_firebase():
             cred = credentials.Certificate('serviceAccountKey.json')
             return firebase_admin.initialize_app(cred)
         except FileNotFoundError:
+            try:
+                # TRY PATH 2: Project Root Config
+                cred = credentials.Certificate('../Project_Hailstorm/config/serviceAccountKey.json')
+                return firebase_admin.initialize_app(cred)
             except FileNotFoundError:
-                try:
-                    # TRY PATH 2: Project Root Config
-                    cred = credentials.Certificate('../Project_Hailstorm/config/serviceAccountKey.json')
-                    return firebase_admin.initialize_app(cred)
-                except FileNotFoundError:
-                    # TRY PATH 3: Application Default Credentials (CLI / Cloud Shell)
-                    # This allows 'gcloud auth application-default login' to work
-                    print("⚠️ JSON Key not found. Using Application Default Credentials...")
-                    cred = credentials.ApplicationDefault()
-                    return firebase_admin.initialize_app(cred, {
-                        'projectId': 'solid-binder-487301-q0',
-                    })
+                # TRY PATH 3: Application Default Credentials (CLI / Cloud Shell)
+                # This allows 'gcloud auth application-default login' to work
+                print("⚠️ JSON Key not found. Using Application Default Credentials...")
+                cred = credentials.ApplicationDefault()
+                return firebase_admin.initialize_app(cred, {
+                    'projectId': 'solid-binder-487301-q0',
+                })
     return firebase_admin.get_app()
 
 app = init_firebase()
