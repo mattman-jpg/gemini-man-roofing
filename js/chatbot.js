@@ -92,20 +92,32 @@ document.addEventListener('DOMContentLoaded', () => {
         // Bot Response (Simulation for UI Phase)
         const typingId = showTyping();
 
-        // TODO: Replace with real API call to Python Backend
+        // TODO: Replace with real API call to Python Backend when ready for full LLM integration
         setTimeout(() => {
             removeTyping(typingId);
             
-            // Mock Response Logic
-            let response = "I'm connecting to the Gemini Ultra neural network...";
-            if (text.toLowerCase().includes('price') || text.toLowerCase().includes('cost')) {
-                response = "Roof replacements in Dallas typically range from <strong>$4.50 to $6.50 per sq ft</strong> for 30-year architectural shingles. <br><br>Would you like a more precise estimate based on your address?";
-            } else if (text.toLowerCase().includes('hail')) {
-                response = "We tracked significant hail (1.75 inch) in Plano on May 4th. <br><br>I can pull a free hail report for your specific address. What is it?";
+            const lowerText = text.toLowerCase();
+            let response = "I'm the Gemini Man Assistant. I can help answer questions about roof replacements, hail damage, insurance claims, or scheduling a free inspection. How can I help?";
+            
+            // Smarter local roofing knowledge base
+            if (lowerText.match(/price|cost|much|estimate/)) {
+                response = "Roof replacements in Texas typically range from <strong>$4.50 to $6.50 per sq ft</strong> for 30-year architectural shingles. Commercial roofs depend on the system. <br><br>Would you like to schedule a free drone inspection to get an exact quote?";
+            } else if (lowerText.match(/hail|storm|wind|damage/)) {
+                response = "We closely track storm data across Texas and Oklahoma. If you suspect hail or wind damage, it's critical to get it documented before filing a claim. <br><br>I can pull a free specialized hail report for your exact address. What is your address?";
+            } else if (lowerText.match(/insurance|claim|deductible/)) {
+                response = "Navigating insurance is our specialty. We help you document the damage correctly so the adjuster sees exactly what we see. We work with all major carriers. <br><br>Have you already filed a claim, or are you just getting started?";
+            } else if (lowerText.match(/how long|time|schedule|duration/)) {
+                response = "A typical residential roof replacement takes just <strong>1 to 2 days</strong> to complete once materials arrive. We clean up magnetic sweeps for nails daily. <br><br>Are you looking to get this done soon?";
+            } else if (lowerText.match(/hello|hi|hey/)) {
+                response = "Hello there! I can help you with roofing estimates, hail inspections, or general questions about our process. What's on your mind today?";
+            } else if (lowerText.match(/metal|standing seam|tpo|commercial/)) {
+                response = "Yes, we specialize in advanced commercial systems including TPO, Silicone Coatings, and Standing Seam Metal. These systems can often be written off as maintenance for tax purposes! <br><br>Are you looking at a commercial property?";
+            } else if (lowerText.match(/inspect|free|appointment|book/)) {
+                response = "Awesome. The fastest way to get on our schedule is to fill out our <a href='#storm-center' style='color:#00d2ff; text-decoration:underline;'>Booking Form here</a>, or call us directly at (866) 518-2906.";
             }
 
             addMessage(response, 'bot');
-        }, 1500);
+        }, 1200);
     }
 
     // Event Listeners

@@ -9,7 +9,7 @@ import pandas as pd
 from datetime import datetime
 from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Mail, TrackingSettings, ClickTracking
 import google.generativeai as genai
 
 # Load environment variables
@@ -110,8 +110,8 @@ def generate_email_content(lead, step):
     referral_url = "https://geminimanroofing.com/refer.html"
     
     prompt = f"""
-    You are the "Gemini Man" - a futuristic, high-tech roofing consultant for exclusive properties.
-    Write a sophisticated, avant-garde email to a property owner.
+    You are Alexander, a professional roofing consultant representing Gemini Man Roofing.
+    Write a brief, helpful, and natural email to a property owner.
     
     Lead Info:
     - Name: {lead['name']}
@@ -119,31 +119,31 @@ def generate_email_content(lead, step):
     - City: {lead['city']}
     
     Context (Step: {step}):
-    - If "day1": "Anomaly Detected". You scanned the {lead['city']} grid and identified specific hail impact signatures near their coordinates. It's not just a roof; it's an asset requiring calibration.
-    - If "day3": "Data Correlation". The weather data overlaps with their asset value. Suggest a "Forensic Drone Calibration" (Inspection).
-    - If "day7": "Final Transmission". Closing the loop on this grid sector.
+    - If "day1": You recently performed a roof inspection in {lead['city']} and noticed potential hail damage near their specific address. Offer a completely free, no-obligation drone roof report.
+    - If "day3": Following up. Share that their neighborhood has confirmed data for hail overlapping with their home. Reiterate the free inspection.
+    - If "day7": Final polite reach out, just leaving your contact info in case they change their mind later this year.
     
     MANDATORY REQUIREMENTS:
-    1. Tone: Minimalist, Intelligent, Slightly Futuristic, but Professional. "Avant-Garde".
-    2. CALL TO ACTION: Use this link for the "Forensic Inspection": {inspection_url}
-    3. REFERRAL: "Have a neighbor in this grid? Send them this link for a $250 Protocol Reward: {referral_url}"
+    1. Tone: Warm, professional, concise, and helpful. Do not sound like a sales pitch. 
+    2. CALL TO ACTION: Use this link exactly for the "Free Drone Inspection": {inspection_url}
+    3. REFERRAL: "Do you have a neighbor who might need their roof checked? Send them this link for a $250 Visa Gift Card if they get a replacement: {referral_url}"
     
     Constraints:
     - Keep it under 90 words.
     - Use line breaks for readability.
-    - Do not sound like a spammy salesman. Sound like a high-end consultant.
+    - Sound like a real human sending a note to a neighbor.
     """
 
     try:
         content = ""
         if ai_provider == "openai":
             response = ai_client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[
-                    {"role": "system", "content": "You are Gemini Man: A high-tech, avant-garde automated home consultant."},
+                    {"role": "system", "content": "You are a professional local roofing consultant writing highly personalized, warm emails."},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.8,
+                temperature=0.7,
                 max_tokens=250
             )
             content = response.choices[0].message.content.strip()
@@ -167,7 +167,7 @@ def generate_email_content(lead, step):
         final_html = html_template.replace("{content}", content).replace("{inspection_url}", inspection_url)
         
         return {
-            "subject": f"Grid Alert: {lead['address']} [Urgent Data]",
+            "subject": f"Roof inspection near {lead['address']}",
             "content": final_html
         }
             
@@ -282,12 +282,27 @@ def send_email(lead, step, dry_run=False):
             logger.error(f"Missing API Key for account {account['id']}. Skipping.")
             return False
 
+        import re
+        import html
+        # Generate plain text alternative to bypass strict spam filters
+        plain_text = re.sub('<[^<]+>', '\n', content)
+        plain_text = html.unescape(plain_text).strip()
+        plain_text = re.sub(r'\n+', '\n', plain_text) # clean up extra newlines
+
         message = Mail(
             from_email=account['email'],
             to_emails=lead['email'],
             subject=subject,
-            html_content=content # Explicitly using html_content
+            html_content=content, 
+            plain_text_content=plain_text
         )
+        message.reply_to = 'mattman@geminimanroofing.com'
+        
+        # VERY CRITICAL SPAM FIX: Disable click tracking!
+        # Sendgrid automatically wraps links in 'http://ct.sendgrid.net' which Apple iCloud Mail marks as a 'phishing/redirect' threat for new domains.
+        tracking_settings = TrackingSettings()
+        tracking_settings.click_tracking = ClickTracking(enable=False, enable_text=False)
+        message.tracking_settings = tracking_settings
         
         # Debug: Check if content looks like HTML
         stripped_content = content.strip()
