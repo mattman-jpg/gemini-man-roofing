@@ -171,6 +171,16 @@
 
                     <input type="hidden" name="city_page_source" value="Richardson">
 
+                    <div class="form-group checkbox-group"
+                        style="display: flex; gap: 10px; align-items: start; margin-bottom: 15px; text-align: left;">
+                        <input type="checkbox" id="sms_optin" name="sms_optin" required
+                            style="width: 20px; height: 20px; margin-top: 3px;">
+                        <label for="sms_optin" style="font-size: 0.8rem; color: #ccc; line-height: 1.4;">
+                            I agree to receive text messages from Gemini Man Roofing. Msg & data rates may apply. Reply
+                            STOP to opt out.
+                        </label>
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-block">Schedule Assessment</button>
                     <p class="form-disclaimer">Your data is secure. We prioritize privacy.</p>
                 </form>
@@ -200,8 +210,10 @@
                 alert('Request received! A Richardson specialist will contact you shortly.');
                 // Here you would add the actual EmailJS or backend logic hook
             });
-        }
     </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh61--ULfvqcwB2XTTG4C84N--JZw1M&callback=initMap&libraries=places,marker&v=weekly&loading=async"
+        defer></script>
 </body>
 
 </html>

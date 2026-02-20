@@ -1,0 +1,42 @@
+*** COPY AND PASTE THESE EXACT ANSWERS INTO THE TWILIO FORM ***
+
+---
+
+**Step 2: Opt-In Workflow**
+
+**Q: Describe how users opt-in to receive messages from your business.**
+A: Users opt-in by visiting our website (geminimanroofing.com) and completing the "Request Inspection" or "Contact Us" form. Specifically, they must satisfy a mandatory checkbox that states: "I agree to receive SMS notifications from Gemini Man Roofing (e.g., appointment confirmations, arrival alerts, weather updates) at the phone number provided. Consent is not a condition of purchase. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out." This checkbox is required to submit the form. We also obtain verbal consent during recorded inbound calls for service estimates.
+
+**Q: Please provide the URL where the opt-in occurs.**
+A: https://geminimanroofing.com/index.html#storm-center
+
+**Q: Image of Opt-In**
+(TAKE A SCREENSHOT of the form at the bottom of your website showing the new checkbox and upload it here)
+
+---
+
+**Step 3: Campaign & Content**
+
+**Q: Campaign Description (What are you sending?)**
+A: We send transactional notifications to homeowners regarding their requested roof inspections, estimate appointments, and project status updates. Messages include appointment confirmations ("Your inspection is scheduled for [Date]"), technician arrival alerts ("Your roofer is en route"), and weather alerts relevant to their active service requests (e.g. "Hail detected at your property address").
+
+**Q: Sample Message 1**
+A: Gemini Man Roofing: Hi John, this is a reminder for your roof inspection tomorrow at 2 PM. Reply STOP to cancel.
+
+**Q: Sample Message 2**
+A: Gemini Man Roofing: Our technician Mike is en route to your property for the scheduled inspection. Call 866-518-2906 if you need to reschedule. Reply STOP to opt out.
+
+**Q: Opt-In Confirmation Message (Optional but recommended)**
+A: You have subscribed to Gemini Man Roofing updates. Msg frequency varies. Msg&Data rates may apply. Reply HELP for help, STOP to cancel.
+
+**Q: Help Message**
+A: Gemini Man Roofing Help: For support call 866-518-2906 or email help@geminimanroofing.com. Reply STOP to cancel.
+
+---
+
+**Step 4: Privacy Policy**
+
+**Q: Privacy Policy URL**
+A: https://geminimanroofing.com/privacy.html
+
+(Note: We have updated your privacy policy to explicitly state: "No mobile information will be shared with third parties/affiliates for marketing/promotional purposes.")

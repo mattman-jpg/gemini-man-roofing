@@ -640,3 +640,35 @@ if (emailQuoteBtn) {
         }
     });
 }
+// --- GOOGLE PLACES AUTOCOMPLETE ---
+function initAutocomplete() {
+    // Target inputs: Main Lead Form, Neighbor Referral, and City Page Form
+    const addressInputs = [
+        document.getElementById('address'), // Main Hail Form
+        document.querySelector('input[name="neighborAddress"]'), // Referral Form
+        document.querySelector('input[name="address"]') // Generic selector for City Pages
+    ];
+
+    addressInputs.forEach(input => {
+        if (input) {
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                componentRestrictions: { country: "us" },
+                fields: ["address_components", "geometry", "icon", "name"],
+                types: ["address"],
+            });
+
+            // Prevent "Enter" from submitting form when selecting address
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') e.preventDefault();
+            });
+        }
+    });
+}
+
+// Global callback for GMaps script
+window.initMap = function () {
+    // Initialize Map Widget (if present)
+    if (typeof initServiceMap === 'function') initServiceMap();
+    // Initialize Autocomplete
+    initAutocomplete();
+};
