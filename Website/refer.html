@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refer a Neighbor | Gemini Man Roofing</title>
+    <meta name="description"
+        content="Refer a friend or neighbor and earn a $250 Visa Gift Card when their roof is replaced.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+    <style>
+        /* Specific Overrides for Refer Page */
+        body {
+            background: url('Gemini_Generated_Image_7ncu6y7ncu6y7ncu.jpeg') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            /* Dark overlay */
+            z-index: 0;
+        }
+
+        .refer-container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 100px auto auto;
+            /* Push down from top */
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .logo-text {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .logo-text span {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+        }
+
+        p.subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .reward-badge {
+            background: rgba(255, 61, 0, 0.1);
+            color: #ff3d00;
+            border: 1px dashed #ff3d00;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 20px;
+        }
+
+        .footer-link {
+            display: block;
+            margin-top: 40px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .footer-link:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+
+    <div class="refer-container">
+        <div class="glass-card">
+            <!-- Logo -->
+            <a href="index.html" style="text-decoration: none;">
+                <div class="logo-text">
+                    GEMINI MAN <br>
+                    <span>ROOFING</span>
+                </div>
+            </a>
+
+            <h1>Refer a <span class="highlight">Neighbor</span></h1>
+            <p class="subtitle">Help them protect their home and earn cash.</p>
+
+            <div class="reward-badge">
+                🎁 Get a $250 Visa Gift Card
+            </div>
+
+            <form id="referralForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+
+                <h3 style="text-align: left; color: #fff; margin-bottom: 15px; font-size: 1.1rem;">Who is the neighbor?
+                </h3>
+                <div class="form-group">
+                    <input type="text" name="neighborName" placeholder="Neighbor's Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="neighborAddress" placeholder="Neighbor's Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="neighborPhone" placeholder="Neighbor's Phone (Optional)">
+                </div>
+
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 25px 0;">
+
+                <h3 style="text-align: left; color: #fff; margin-bottom: 15px; font-size: 1.1rem;">Your Details (for the
+                    reward)</h3>
+                <div class="form-group">
+                    <input type="text" name="referrerName" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="referrerEmail" placeholder="Your Email" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Submit Referral</button>
+
+                <p class="form-disclaimer">
+                    Reward is paid upon successful completion of a full roof replacement.
+                    We will contact your neighbor courteously.
+                </p>
+            </form>
+        </div>
+
+        <a href="index.html" class="footer-link">← Back to Homepage</a>
+    </div>
+
+</body>
+
+</html>

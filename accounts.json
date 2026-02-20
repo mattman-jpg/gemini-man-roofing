@@ -1,0 +1,194 @@
+[
+    {
+        "id": "main",
+        "email": "help@geminimanroofing.com",
+        "name": "Gemini Man Help",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "hector",
+        "email": "hector@geminimanroofing.com",
+        "name": "Hector Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "josh",
+        "email": "josh@geminimanroofing.com",
+        "name": "Josh Lopez",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "mattg",
+        "email": "mattman@geminimanroofing.com",
+        "name": "Matt Giron",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "matt",
+        "email": "matt@geminimanroofing.com",
+        "name": "Matt Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "nathan",
+        "email": "nathan@geminimanroofing.com",
+        "name": "Nathan Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "patty",
+        "email": "patty@geminimanroofing.com",
+        "name": "Patty Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "robin",
+        "email": "robin@geminimanroofing.com",
+        "name": "Robin Nunn",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "ryan",
+        "email": "ryan@geminimanroofing.com",
+        "name": "Ryan Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "sarah",
+        "email": "sarah@geminimanroofing.com",
+        "name": "Sarah Johnson",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "tyler",
+        "email": "tyler@geminimanroofing.com",
+        "name": "Tyler Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "veronica",
+        "email": "veronica@geminimanroofing.com",
+        "name": "Veronica Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "tony",
+        "email": "tony@geminimanroofing.com",
+        "name": "Tony Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "ruthie",
+        "email": "ruthie@geminimanroofing.com",
+        "name": "Ruthie Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "kenny",
+        "email": "kenny@geminimanroofing.com",
+        "name": "Kenny Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "cody",
+        "email": "cody@geminimanroofing.com",
+        "name": "Cody Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "dakota",
+        "email": "dakota@geminimanroofing.com",
+        "name": "Dakota Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "nancy",
+        "email": "nancy@geminimanroofing.com",
+        "name": "Nancy Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "manny",
+        "email": "manny@geminimanroofing.com",
+        "name": "Manny Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "jason",
+        "email": "jason@geminimanroofing.com",
+        "name": "Jason Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "addison",
+        "email": "addison@geminimanroofing.com",
+        "name": "Addison Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "alexander",
+        "email": "alexander@geminimanroofing.com",
+        "name": "Alexander Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "london",
+        "email": "london@geminimanroofing.com",
+        "name": "London Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "trae",
+        "email": "trae@geminimanroofing.com",
+        "name": "Trae Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "tysin",
+        "email": "tysin@geminimanroofing.com",
+        "name": "Tysin Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "marsha",
+        "email": "marsha@geminimanroofing.com",
+        "name": "Marsha Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "scott",
+        "email": "scott@geminimanroofing.com",
+        "name": "Scott Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "nick",
+        "email": "nick@geminimanroofing.com",
+        "name": "Nick Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "patrick",
+        "email": "patrick@geminimanroofing.com",
+        "name": "Patrick Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "robert",
+        "email": "robert@geminimanroofing.com",
+        "name": "Robert Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "zach",
+        "email": "zach@geminimanroofing.com",
+        "name": "Zach Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    },
+    {
+        "id": "katie",
+        "email": "katie@geminimanroofing.com",
+        "name": "Katie Gemini",
+        "api_key_env": "SENDGRID_API_KEY"
+    }
+]

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Instant Storm Alerts - Gemini Man Roofing</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .opt-in-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            font-size: 0.8rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-container input {
+            margin-top: 3px;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #d35400;
+        }
+
+        .legal {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="opt-in-card">
+        <!-- Placeholder for Logo -->
+        <h1 style="color: #e67e22;">⚡ VIP Storm Alerts</h1>
+        <p>Be the first to know when hail hits your neighborhood. Get instant text updates and priority inspection
+            slots.</p>
+
+        <form id="smsForm">
+            <input type="tel" id="phone" placeholder="(817) 555-0123" required pattern="[0-9]{3}-?[0-9]{3}-?[0-9]{4}">
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="consent" required>
+                <label for="consent">I agree to receive automated storm alert text messages from Gemini Man Roofing.
+                    Reply STOP to cancel. Msg & data rates may apply.</label>
+            </div>
+
+            <button type="submit">Enable SMS Alerts</button>
+        </form>
+
+        <p class="legal">We respect your privacy. Your number will never be shared.</p>
+    </div>
+
+    <script>
+        document.getElementById('smsForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const phone = document.getElementById('phone').value;
+            // In a real app, this would POST to your backend
+            alert("Thanks! You're on the list. Expect a welcome text shortly.");
+            // Optional: Redirect or clear form
+            this.reset();
+        });
+    </script>
+
+</body>
+
+</html>

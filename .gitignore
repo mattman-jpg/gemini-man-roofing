@@ -1,14 +1,8 @@
-# Dependencies
-node_modules/
-/Website/node_modules/
-
-# OS misc
-.DS_Store
-Thumbs.db
-
-# Clasp / Google Apps Script
-.clasp.json
-.claspignore
-
-# Environment variables
+__pycache__/
+*.pyc
 .env
+node_modules/
+.DS_Store
+token.json
+credentials.json
+*.log

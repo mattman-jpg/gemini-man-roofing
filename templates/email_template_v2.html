@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* AVANT-GARDE DARK THEME */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            color: #e2e8f0;
+        }
+
+        table {
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        img {
+            border: 0;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #0f172a;
+            padding-bottom: 60px;
+        }
+
+        /* The Glass Card */
+        .main-content {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        /* Gradient Header Line */
+        .accent-bar {
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, #f59e0b, #ec4899);
+        }
+
+        .header {
+            padding: 40px 30px 20px;
+            text-align: center;
+        }
+
+        /* Website Logo Replica */
+        .logo-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #f8fafc;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-align: left;
+            /* Logo aligns left in its container usually, but center looks better in email header unless specified */
+        }
+
+        .logo-text span {
+            color: #f59e0b;
+            /* Website accent color */
+        }
+
+        .content-block {
+            padding: 20px 40px 40px;
+            line-height: 1.8;
+            font-size: 16px;
+            color: #cbd5e1;
+        }
+
+        .content-block p {
+            margin-bottom: 24px;
+        }
+
+        .content-block strong {
+            color: #f1f5f9;
+        }
+
+        /* Primary CTA */
+        .btn-container {
+            text-align: center;
+            margin: 45px 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #ffffff;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* Referral Section */
+        .referral-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .referral-link {
+            color: #f59e0b;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 8px;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            padding: 30px;
+        }
+
+        .footer a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .main-content {
+                width: 100%;
+                border-radius: 0;
+                border: none;
+            }
+
+            .content-block {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td align="center">
+                    <br><br>
+                    <!-- Main Glass Card -->
+                    <div class="main-content">
+                        <div class="accent-bar"></div>
+
+                        <!-- Header -->
+                        <div class="header">
+                            <div class="logo-text">
+                                GEMINI MAN <br>
+                                <span>ROOFING</span>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="content-block">
+                            <!-- AI Content Injection -->
+                            {content}
+
+                            <!-- Primary CTA -->
+                            <div class="btn-container">
+                                <a href="{inspection_url}" class="btn">View My Roof Report</a>
+                            </div>
+
+                            <!-- Avant-Garde Referral Section -->
+                            <div class="referral-box">
+                                <p
+                                    style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8;">
+                                    Community Rewards</p>
+                                <p style="margin: 10px 0 0; color: #f1f5f9; font-size: 15px;">
+                                    Know a neighbor with storm damage?
+                                </p>
+                                <a href="https://geminimanroofing.com/#contact" class="referral-link">
+                                    Claim your $250 Visa Gift Card Here &rarr;
+                                </a>
+                            </div>
+
+                            <div style="text-align: center; margin-top: 30px; opacity: 0.6;">
+                                <a href="https://geminimanroofing.com/sms-opt-in.html"
+                                    style="color: #94a3b8; font-size: 13px; text-decoration: none;">
+                                    ⚡ Enable Instant Storm Alerts
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Minimal Footer -->
+                    <div class="footer">
+                        <p>FORT WORTH, TEXAS</p>
+                        <p style="opacity: 0.5;">Manage Preferences | Unsubscribe</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>
