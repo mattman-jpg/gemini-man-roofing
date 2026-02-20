@@ -1,0 +1,102 @@
+[
+  {
+    "city": "Plano",
+    "state": "TX",
+    "county": "Collin",
+    "zip_codes": ["75023", "75024", "75025", "75074", "75075", "75093"],
+    "last_storm_date": "May 4, 2024",
+    "hail_size": "1.75 inch",
+    "map_lat": 33.0198,
+    "map_lng": -96.6989
+  },
+  {
+    "city": "Frisco",
+    "state": "TX",
+    "county": "Collin",
+    "zip_codes": ["75033", "75034", "75035", "75036"],
+    "last_storm_date": "May 28, 2024",
+    "hail_size": "2.0 inch",
+    "map_lat": 33.1507,
+    "map_lng": -96.8236
+  },
+  {
+    "city": "McKinney",
+    "state": "TX",
+    "county": "Collin",
+    "zip_codes": ["75069", "75070", "75071", "75072"],
+    "last_storm_date": "March 14, 2024",
+    "hail_size": "1.5 inch",
+    "map_lat": 33.1972,
+    "map_lng": -96.6398
+  },
+  {
+    "city": "Allen",
+    "state": "TX",
+    "county": "Collin",
+    "zip_codes": ["75002", "75013"],
+    "last_storm_date": "May 19, 2023",
+    "hail_size": "4.0 inch",
+    "map_lat": 33.1032,
+    "map_lng": -96.6706
+  },
+  {
+    "city": "Richardson",
+    "state": "TX",
+    "county": "Dallas",
+    "zip_codes": ["75080", "75081", "75082"],
+    "last_storm_date": "June 12, 2023",
+    "hail_size": "1.25 inch",
+    "map_lat": 32.9483,
+    "map_lng": -96.7299
+  },
+  {
+    "city": "Garland",
+    "state": "TX",
+    "county": "Dallas",
+    "zip_codes": ["75040", "75041", "75042", "75043", "75044"],
+    "last_storm_date": "May 28, 2024",
+    "hail_size": "3.5 inch",
+    "map_lat": 32.9126,
+    "map_lng": -96.6389
+  },
+  {
+    "city": "Irving",
+    "state": "TX",
+    "county": "Dallas",
+    "zip_codes": ["75038", "75039", "75060", "75061", "75062", "75063"],
+    "last_storm_date": "Sept 4, 2023",
+    "hail_size": "1.0 inch",
+    "map_lat": 32.8140,
+    "map_lng": -96.9489
+  },
+  {
+    "city": "Grapevine",
+    "state": "TX",
+    "county": "Tarrant",
+    "zip_codes": ["76051"],
+    "last_storm_date": "April 20, 2023",
+    "hail_size": "1.5 inch",
+    "map_lat": 32.9343,
+    "map_lng": -97.0781
+  },
+  {
+    "city": "Southlake",
+    "state": "TX",
+    "county": "Tarrant",
+    "zip_codes": ["76092"],
+    "last_storm_date": "April 28, 2021",
+    "hail_size": "2.75 inch",
+    "map_lat": 32.9412,
+    "map_lng": -97.1342
+  },
+  {
+    "city": "Lewisville",
+    "state": "TX",
+    "county": "Denton",
+    "zip_codes": ["75056", "75057", "75067", "75077"],
+    "last_storm_date": "June 15, 2023",
+    "hail_size": "1.0 inch",
+    "map_lat": 33.0190,
+    "map_lng": -96.9942
+  }
+]
