@@ -112,8 +112,8 @@
             const typingId = showTyping();
 
             try {
-                // Live Server Endpoint (Local for now, change to production URL later)
-                const response = await fetch('http://127.0.0.1:8081/api/chat', {
+                // Live Server Endpoint
+                const response = await fetch('https://chatbot-api-103616089821.us-central1.run.app/api/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
