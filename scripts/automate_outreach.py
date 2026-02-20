@@ -106,7 +106,7 @@ def generate_email_content(lead, step):
         return TEMPLATES.get(step) # Fallback
 
     # Prompt Engineering (Avant-Garde / High-Conversion)
-    inspection_url = "https://geminimanroofing.com/book-inspection?source=ai_outreach"
+    inspection_url = "https://geminimanroofing.com/#storm-center"
     referral_url = "https://geminimanroofing.com/refer.html"
     
     prompt = f"""
@@ -174,13 +174,21 @@ def generate_email_content(lead, step):
     except Exception as e:
         logger.error(f"AI Gen Error: {e}")
         # FALLBACK: Use a generic safe message but WRAPPED in the HTML template
-        fallback_text = TEMPLATES.get(step) 
+        fallback_data = TEMPLATES.get(step, {"subject": f"Update regarding {lead.get('address', 'your property')}", "content": "Hi,<br><br>We saw some concerns at your property. Open to a free drone report?"}) 
+        
+        fallback_text = fallback_data["content"]
+        name = lead.get('contact_name', 'Neighbor').split()[0] if lead.get('contact_name') else 'Neighbor'
+        address = lead.get('address', '')
+        
+        fallback_text = fallback_text.replace("{name}", name).replace("{address}", address)
+        fallback_subject = fallback_data["subject"].replace("{address}", address)
+        
         # Convert newlines to breaks for HTML
         fallback_html = fallback_text.replace("\n", "<br>")
         
         final_html = html_template.replace("{content}", fallback_html).replace("{inspection_url}", inspection_url)
         return {
-            "subject": f"Update regarding {lead['address']}",
+            "subject": fallback_subject,
             "content": final_html
         }
 

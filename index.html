@@ -795,6 +795,39 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh61--ULfvqcwB2XTTG4C84N--JZw1M&callback=initMap&libraries=places,marker&v=weekly&loading=async"
         defer></script>
+
+    <!-- Address Autocomplete for Lead Form -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Wait a moment for Google Maps API to load if it's deferred
+            checkGoogleMaps();
+        });
+
+        function checkGoogleMaps() {
+            if (typeof google === 'object' && typeof google.maps === 'object' && typeof google.maps.places === 'object') {
+                initAddressAutocomplete();
+            } else {
+                setTimeout(checkGoogleMaps, 100);
+            }
+        }
+
+        function initAddressAutocomplete() {
+            var addressInput = document.getElementById('address');
+            if (addressInput) {
+                var autocomplete = new google.maps.places.Autocomplete(addressInput, {
+                    types: ['address'],
+                    componentRestrictions: { country: 'us' }
+                });
+
+                // Prevent form submission when pressing enter in autocomplete dropdown
+                addressInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

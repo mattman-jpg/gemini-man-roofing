@@ -185,6 +185,28 @@
         <a href="index.html" class="footer-link">← Back to Homepage</a>
     </div>
 
+    <!-- Address Autocomplete -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh61--ULfvqcwB2XTTG4C84N--JZw1M&libraries=places&callback=initAutocomplete">
+        </script>
+    <script>
+        function initAutocomplete() {
+            var addressInput = document.querySelector('input[name="neighborAddress"]');
+
+            // Set up Google Maps Places Autocomplete
+            var autocomplete = new google.maps.places.Autocomplete(addressInput, {
+                types: ['address'],
+                componentRestrictions: { country: 'us' } // Assuming US-based priority
+            });
+
+            // Prevent form submission on hitting enter in the autocomplete dropdown
+            addressInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
