@@ -45,13 +45,16 @@
 
         // State
         let isOpen = false;
+        let chatHistory = [];
 
         // Functions
         function toggleChat() {
+            console.log("Chat toggle clicked! Current state:", isOpen);
+
             isOpen = !isOpen;
             if (isOpen) {
                 chatWindow.classList.add('active');
-                chatInput.focus();
+                if (chatInput) chatInput.focus();
             } else {
                 chatWindow.classList.remove('active');
             }
@@ -71,10 +74,10 @@
         function showTyping() {
             const id = 'typing-' + Date.now();
             const html = `
-                <div class="message bot typing" id="${id}">
-                    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-                </div>
-            `;
+            <div class="message bot typing" id="${id}">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+        `;
             chatBody.insertAdjacentHTML('beforeend', html);
             chatBody.scrollTop = chatBody.scrollHeight;
             return id;
@@ -85,6 +88,15 @@
             if (el) el.remove();
         }
 
+        // Convert links in text to real a tags
+        function formatResponse(text) {
+            // Very basic simple URL to Link formatting, or markdown-style links if needed
+            // Assuming AI output might return some markdown
+            let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // bold
+            formatted = formatted.replace(/\n/g, '<br>'); // line breaks
+            return formatted;
+        }
+
         async function handleSend() {
             const text = chatInput.value.trim();
             if (!text) return;
@@ -93,48 +105,63 @@
             addMessage(text, 'user');
             chatInput.value = '';
 
+            // Add to local history
+            chatHistory.push({ role: 'user', content: text });
+
             // Bot Response (Simulation for UI Phase)
             const typingId = showTyping();
 
-            // TODO: Replace with real API call to Python Backend when ready for full LLM integration
-            setTimeout(() => {
+            try {
+                // Live Server Endpoint (Local for now, change to production URL later)
+                const response = await fetch('http://127.0.0.1:8081/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: text,
+                        history: chatHistory.slice(-10) // Send last 10 messages for context
+                    })
+                });
+
                 removeTyping(typingId);
 
-                const lowerText = text.toLowerCase();
-                let response = "I'm the Gemini Man Assistant. I can help answer questions about roof replacements, hail damage, insurance claims, or scheduling a free inspection. How can I help?";
+                if (response.ok) {
+                    const data = await response.json();
+                    let botReply = data.response;
 
-                // Smarter local roofing knowledge base
-                if (lowerText.match(/price|cost|much|estimate/)) {
-                    response = "Roof replacements in Texas typically range from <strong>$4.50 to $6.50 per sq ft</strong> for 30-year architectural shingles. Commercial roofs depend on the system. <br><br>Would you like to schedule a free drone inspection to get an exact quote?";
-                } else if (lowerText.match(/hail|storm|wind|damage/)) {
-                    response = "We closely track storm data across Texas and Oklahoma. If you suspect hail or wind damage, it's critical to get it documented before filing a claim. <br><br>I can pull a free specialized hail report for your exact address. What is your address?";
-                } else if (lowerText.match(/insurance|claim|deductible/)) {
-                    response = "Navigating insurance is our specialty. We help you document the damage correctly so the adjuster sees exactly what we see. We work with all major carriers. <br><br>Have you already filed a claim, or are you just getting started?";
-                } else if (lowerText.match(/how long|time|schedule|duration/)) {
-                    response = "A typical residential roof replacement takes just <strong>1 to 2 days</strong> to complete once materials arrive. We clean up magnetic sweeps for nails daily. <br><br>Are you looking to get this done soon?";
-                } else if (lowerText.match(/hello|hi|hey/)) {
-                    response = "Hello there! I can help you with roofing estimates, hail inspections, or general questions about our process. What's on your mind today?";
-                } else if (lowerText.match(/metal|standing seam|tpo|commercial/)) {
-                    response = "Yes, we specialize in advanced commercial systems including TPO, Silicone Coatings, and Standing Seam Metal. These systems can often be written off as maintenance for tax purposes! <br><br>Are you looking at a commercial property?";
-                } else if (lowerText.match(/inspect|free|appointment|book/)) {
-                    response = "Awesome. The fastest way to get on our schedule is to fill out our <a href='#storm-center' style='color:#00d2ff; text-decoration:underline;'>Booking Form here</a>, or call us directly at (866) 518-2906.";
+                    if (data.error) {
+                        botReply = "Error: " + data.error;
+                    }
+
+                    addMessage(formatResponse(botReply), 'bot');
+                    chatHistory.push({ role: 'assistant', content: botReply });
+                } else {
+                    addMessage("Sorry, I am having trouble connecting to my neural network.", 'bot');
                 }
-
-                addMessage(response, 'bot');
-            }, 1200);
+            } catch (error) {
+                console.error("Chat API Error:", error);
+                removeTyping(typingId);
+                addMessage("Systems are offline. Please call us at (866) 518-2906.", 'bot');
+            }
         }
 
         // Event Listeners
-        toggleBtn.addEventListener('click', toggleChat);
-        closeBtn.addEventListener('click', toggleChat);
+        console.log("Attaching event listeners to Chatbot...");
+        if (toggleBtn) toggleBtn.addEventListener('click', toggleChat);
+        if (closeBtn) closeBtn.addEventListener('click', toggleChat);
 
-        sendBtn.addEventListener('click', handleSend);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSend();
-        });
+        if (sendBtn) sendBtn.addEventListener('click', handleSend);
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSend();
+            });
+        }
+        console.log("Chatbot Initialization Complete.");
     }
 
     // Run initialization safely preventing race condition
+    console.log("Chatbot script loaded. Ready state:", document.readyState);
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initChatbot);
     } else {
