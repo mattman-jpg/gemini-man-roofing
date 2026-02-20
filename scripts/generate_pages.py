@@ -10,7 +10,7 @@ OUTPUT_DIR = "locations"
 def generate_pages():
     # 1. Load Data
     try:
-        with open(DATA_PATH, 'r') as f:
+        with open(DATA_PATH, 'r', encoding='utf-8') as f:
             locations = json.load(f)
     except FileNotFoundError:
         print(f"Error: {DATA_PATH} not found.")
@@ -18,7 +18,7 @@ def generate_pages():
 
     # 2. Load Template
     try:
-        with open(TEMPLATE_PATH, 'r') as f:
+        with open(TEMPLATE_PATH, 'r', encoding='utf-8') as f:
             template_content = f.read()
     except FileNotFoundError:
         print(f"Error: {TEMPLATE_PATH} not found.")
@@ -58,7 +58,7 @@ def generate_pages():
         # The template already has ../index.css, etc. So no change needed if depth is 1.
 
         # Write File
-        with open(output_path, 'w') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(page_content)
         
         print(f"Created: {output_path}")
