@@ -45,7 +45,7 @@
 
         // State
         let isOpen = false;
-        let chatHistory = [];
+        let chatHistory = JSON.parse(localStorage.getItem('geminiChatHistory')) || [];
 
         // Functions
         function toggleChat() {
@@ -107,6 +107,7 @@
 
             // Add to local history
             chatHistory.push({ role: 'user', content: text });
+            localStorage.setItem('geminiChatHistory', JSON.stringify(chatHistory));
 
             // Bot Response (Simulation for UI Phase)
             const typingId = showTyping();
@@ -136,6 +137,7 @@
 
                     addMessage(formatResponse(botReply), 'bot');
                     chatHistory.push({ role: 'assistant', content: botReply });
+                    localStorage.setItem('geminiChatHistory', JSON.stringify(chatHistory));
                 } else {
                     addMessage("Sorry, I am having trouble connecting to my neural network.", 'bot');
                 }
@@ -144,6 +146,15 @@
                 removeTyping(typingId);
                 addMessage("Systems are offline. Please call us at (866) 518-2906.", 'bot');
             }
+        }
+
+        // Render saved history
+        if (chatHistory.length > 0) {
+            chatHistory.forEach(msg => {
+                const sender = msg.role === 'user' ? 'user' : 'bot';
+                const content = msg.role === 'assistant' ? formatResponse(msg.content) : msg.content;
+                addMessage(content, sender);
+            });
         }
 
         // Event Listeners

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AI Roof Estimator | Gemini Man Roofing</title>
+    <meta name="description"
+        content="Draw your roof on our interactive satellite map and get a real-time replacement cost estimate instantly.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="css/chatbot.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-MEASUREMENT_ID');
+    </script>
+
+    <style>
+        .estimator-split {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            align-items: stretch;
+        }
+
+        .map-section {
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            min-height: 600px;
+        }
+
+        #estimator-map {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            gap: 10px;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .map-search {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--primary-color);
+            background: rgba(10, 15, 30, 0.8);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            font-size: 1rem;
+        }
+
+        .clear-btn {
+            background: var(--dark-bg);
+            color: #ccc;
+            border: 1px solid #555;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .calc-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .calc-stat {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .calc-stat h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calc-stat .big-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .calc-stat .sub-text {
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        .lead-gate {
+            position: relative;
+            background: rgba(10, 15, 30, 0.6);
+            border: 1px solid var(--primary-color);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .lead-gate h3 {
+            margin-bottom: 1rem;
+        }
+
+        .blur-overlay {
+            filter: blur(8px);
+            opacity: 0.5;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .gate-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            z-index: 10;
+        }
+
+        @media (max-width: 900px) {
+            .estimator-split {
+                grid-template-columns: 1fr;
+            }
+
+            .map-section {
+                min-height: 400px;
+            }
+        }
+
+        /* Map Instruction Overlay */
+        .map-instruction {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            z-index: 2;
+            pointer-events: none;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            text-align: center;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="emergency-badge">
+                <span class="pulsing-dot"></span> 24/7 Storm Response
+            </div>
+            <a href="tel:+18665182906" class="top-phone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                </svg>
+                (866) 518-2906
+            </a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar" style="background: rgba(10, 15, 30, 0.95);">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-text">
+                    GEMINI MAN <br>
+                    <span>ROOFING</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="storm-restoration.html" style="color: var(--accent-color);">Storm Center</a></li>
+                <li><a href="commercial-roofing.html">Commercial</a></li>
+            </ul>
+            <a href="book-inspection.html" class="btn btn-primary nav-cta">Free Inspection</a>
+        </div>
+    </nav>
+
+    <!-- ESTIMATOR HEADER -->
+    <section class="section-padding bg-dark" style="padding-top: 140px; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="text-center">
+                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">AI ROOF <span class="text-gradient">ESTIMATOR</span>
+                </h1>
+                <p>Search your address and click the corners of your roof to measure your square footage instantly from
+                    space.</p>
+            </div>
+
+            <div class="estimator-split">
+                <!-- Map Panel -->
+                <div class="map-section glass-panel" style="padding: 0;">
+                    <div class="map-controls">
+                        <input type="text" id="address-search" class="map-search"
+                            placeholder="Enter your full address (e.g. 123 Main St, Plano TX)">
+                        <button id="clear-map" class="clear-btn">Reset</button>
+                    </div>
+                    <div id="estimator-map"></div>
+                    <div class="map-instruction">
+                        🔍 Search your address, then click on the corners of your roof to measure it.
+                    </div>
+                </div>
+
+                <!-- Calculator Panel -->
+                <div class="calc-panel">
+
+                    <div class="calc-stat glass-panel">
+                        <h4>Measured Area</h4>
+                        <div class="big-number" id="sqft-display">0</div>
+                        <div class="sub-text">Square Feet</div>
+
+                        <div
+                            style="font-size: 0.9rem; color: #ccc; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            Approx <span id="squares-display"
+                                style="color: var(--primary-color); font-weight: bold;">0</span> Roofing Squares (100
+                            sqft per square)
+                        </div>
+                    </div>
+
+                    <!-- Lead Gate -->
+                    <div class="lead-gate glass-panel">
+                        <div id="locked-results" class="blur-overlay">
+                            <h4 style="color: var(--accent-color); margin-bottom: 10px;">Estimated Cost Range</h4>
+                            <div class="big-number" style="margin-bottom: 20px;">$12,500 - $15,200</div>
+                            <button class="btn btn-primary btn-block">Download Full PDF Report</button>
+                        </div>
+
+                        <div id="unlock-form" class="gate-content">
+                            <h3>Unlock Your Estimate</h3>
+                            <p style="font-size: 0.85rem; margin-bottom: 15px; color: #ccc;">Enter your phone number to
+                                reveal the estimated cost to replace your roof.</p>
+
+                            <form id="estimator-lead-form">
+                                <div class="form-group">
+                                    <input type="text" id="est-name" placeholder="Full Name" required
+                                        style="width: 100%; border-radius: 8px; border: 1px solid #555; background: rgba(0,0,0,0.5); color: #fff; padding: 12px; margin-bottom: 10px;">
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" id="est-phone" placeholder="Phone Number" required
+                                        style="width: 100%; border-radius: 8px; border: 1px solid #555; background: rgba(0,0,0,0.5); color: #fff; padding: 12px; margin-bottom: 15px;">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Show My
+                                    Estimate</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer section-padding" style="margin-top: 40px;">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Gemini Man Roofing. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <script src="script.js?v=7"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/estimator.js"></script>
+
+    <!-- Google Maps script with Geometry & Places library -->
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZh61--ULfvqcwB2XTTG4C84N--JZw1M&callback=initEstimatorMap&libraries=places,geometry,drawing&v=weekly">
+        </script>
+
+</body>
+
+</html>
